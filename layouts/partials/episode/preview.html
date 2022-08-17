@@ -1,0 +1,21 @@
+<div class="card card-episode">
+  <a href="{{ .Permalink }}">
+    <div class="card-image">
+      <figure class="image">
+        <img src="{{.Params.header_image }}" width="432" height="242"
+          alt="{{.Title}} | {{.CurrentSection.Title}} {{.Params.episode}}">
+      </figure>
+    </div>
+    <div class="card-content">
+      <div class="content">
+        <h3>{{.Title}}
+          {{ if ne .Title (print .CurrentSection.Title " " .Params.episode) }}
+            | {{.CurrentSection.Title}} {{.Params.episode}}
+          {{ end }}
+        </h3>
+        <strong>{{ .Date.Day }} {{ .Date.Month }} {{ .Date.Year }}</strong><br />
+        <p style="color:white">{{.Description}}</p>
+      </div>
+    </div>
+  </a>
+</div>

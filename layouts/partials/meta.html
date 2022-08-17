@@ -1,0 +1,81 @@
+<!-- Meta Ttitles -->
+<title itemprop="name">{{ .Title }} | {{ .Site.Title }}</title>
+<meta property="og:title" content="{{ .Title }} | {{ .Site.Title }}" />
+<meta name="twitter:title" content="{{ .Title }} | {{ .Site.Title }}" />
+<meta itemprop="name" content="{{ .Title }} | {{ .Site.Title }}" />
+<meta name="application-name" content="{{ .Title }} | {{ .Site.Title }}" />
+<meta property="og:site_name" content="{{ .Site.Title }}" />
+
+<!-- Meta Description -->
+<meta name="description" content="{{ if .Params.summary }}{{ .Params.summary }}{{ else if .Site.Params.Description }}{{ .Site.Params.Description }}{{ end }}" />
+<meta itemprop="description" content="{{ if .Params.summary }}{{ .Params.summary }}{{ else if .Site.Params.Description }}{{ .Site.Params.Description }}{{ end }}" />
+<meta property="og:description" content="{{ if .Params.summary }}{{ .Params.summary }}{{ else if .Site.Params.Description }}{{ .Site.Params.Description }}{{ end }}" />
+<meta property="twitter:description" content="{{ if .Params.summary }}{{ .Params.summary }}{{ else if .Site.Params.Description }}{{ .Site.Params.Description }}{{ end }}" />
+
+<!-- Meta Keywords -->
+<meta name="keywords" content="{{ if .Params.keywords }}{{ .Params.keywords }}{{ else if .Site.Params.Keywords }}{{ .Site.Params.Keywords }}{{ end }}" />
+
+<!-- Meta Links -->
+<base href="{{ .Permalink }}">
+<link rel="canonical" href="{{ .Permalink }}" itemprop="url" />
+<meta name="url" content="{{ .Permalink }}" />
+<meta name="twitter:url" content="{{ .Permalink }}" />
+<meta property="og:url" content="{{ .Permalink }}" />
+
+<!-- Meta Languages -->
+<meta property="og:locale" content="{{ .Language.Lang }}">
+<meta name="language" content="{{ .Language.LanguageName }}">
+{{ range .AllTranslations }}
+  <link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}" title="{{ .Language.LanguageName }}">
+{{ end }}
+
+<!-- Meta Images -->
+{{ with .Params.header_image }}
+<meta itemprop="image" content="{{ . | absURL }}" />
+<meta property="og:image" content="{{ . | absURL }}" />
+<meta name="twitter:image" content="{{ . | absURL }}" />
+<meta name="twitter:image:src" content="{{ . | absURL }}" />
+{{ else }}
+<meta itemprop="image" content="{{ .Site.Params.ogimage | absURL }}" />
+<meta property="og:image" content="{{ .Site.Params.ogimage | absURL }}" />
+<meta name="twitter:image" content="{{ .Site.Params.ogimage | absURL }}" />
+<meta name="twitter:image:src" content="{{ .Site.Params.ogimage | absURL }}" />
+{{ end }}
+
+<!-- Meta Dates -->
+<meta property="og:updated_time" content={{ .Lastmod.Format "2006-01-02T15:04:05Z0700" | safeHTML }} />
+
+<!-- Sitemap & RSS Feed Tags -->
+<link rel="sitemap" type="application/xml" title="Sitemap" href="{{ .Site.BaseURL }}sitemap.xml" />
+
+{{/* with .OutputFormats.Get "RSS" */}}
+  <!-- <link href="{{ .Permalink }}" rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" />
+  <link href="{{ .Permalink }}" rel="feed" type="application/rss+xml" title="{{ $.Site.Title }}" /> -->
+{{/* end */}}
+<link href="{{ .Site.Params.feed.rss }}" rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" />
+<link href="{{ .Site.Params.feed.rss }}" rel="feed" type="application/rss+xml" title="{{ $.Site.Title }}" />
+
+<!-- Meta Pages -->
+<meta property="og:type" content="website" />
+<meta name="author" content="{{ .Site.Params.author }}" />
+
+<!-- Favicons -->
+
+<link rel="shortcut icon" href="/images/favicon/favicon.ico" />
+<link rel="apple-touch-icon" sizes="16x16" href="/images/favicon/favicon-16x16.png" />
+<link rel="apple-touch-icon" sizes="32x32" href="/images/favicon/favicon-32x32.png" />
+
+<link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png" />
+<link rel="apple-touch-icon" sizes="192x192" href="/images/favicon/android-chrome-192x192.png" />
+<link rel="apple-touch-icon" sizes="512x512" href="/images/favicon/android-chrome-512x512.png" />
+
+<link rel="manifest" href="/images/favicon/site.webmanifest">	
+
+<!-- iPhone Notch Theme Color -->
+
+<meta name="theme-color" content="#0a0b0c">
+
+<!-- Search Engine Crawler -->
+
+<meta name="robots" content="index,follow" />
+<meta name="googlebot" content="index,follow" />
