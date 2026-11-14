@@ -1,0 +1,30 @@
+# Theme defaults. Sites set only what differs; site config always wins.
+
+[module]
+  [module.hugoVersion]
+    min = "0.169.0"
+
+[params]
+  # Episode "Support" button. A site without a /membership/ page (archive) sets an absolute URL.
+  support_url = "/membership/"
+  # Footer "Edit this page" link for theme-rendered pages.
+  theme_repo = "https://github.com/goodwinlabs/jb-hugo-theme"
+
+  author = "Jupiter Broadcasting"
+  ogimage = "/images/logo.png"
+  analytics = "https://plausible.ktz.cloud/js/plausible.js"
+  episode.node_link_base_url = "https://amboss.space/node/"
+  sponsors.lookbackdays = -90
+
+  feed.copyright = "Copyright 2022 Jupiter Broadcasting"
+  feed.itunes_subtitle = "A weekly talk show"
+  feed.itunes_author = "Jupiter Broadcasting"
+  feed.itunes_summary = "A weekly talk show"
+  feed.itunes_owner_name = "Jupiter Broadcasting"
+  feed.itunes_owner_email = "chris@jupiterbroadcasting.com"
+  feed.itunes_image = "https://jb.codefighters.net/images/logo_narrow.png"
+  feed.itunes_top_category = "Education"
+  feed.itunes_first_sub_category = "How To"
+  feed.itunes_second_sub_category = "Business"
+  feed.language = "en-us"
+  feed.itunes_type = "episodic"
