@@ -7,6 +7,9 @@
 [params]
   # Episode "Support" button. A site without a /membership/ page (archive) sets an absolute URL.
   support_url = "/membership/"
+  # Which shows the home page slider and /show/ list: true on the main site, false on the archive.
+  shows_active = true
+  home_subtitle = "Home to the best shows on Linux, Open Source, Security, Privacy, Community, Development, and News."
   # Footer "Edit this page" link for theme-rendered pages.
   theme_repo = "https://github.com/goodwinlabs/jb-hugo-theme"
 

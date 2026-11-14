@@ -4,7 +4,7 @@
     <div class="container">
       <img class="logo" src="/images/logo_narrow.png" alt="Jupiter Broadcasting Logo"/>
       <p class="subtitle has-text-centered">
-        Home to the best shows on Linux, Open Source, Security, Privacy, Community, Development, and News.
+        {{ site.Params.home_subtitle }}
       </p>
     </div>
   </div>
@@ -27,7 +27,7 @@
          {{- end -}}
         {{- range $all_most_recent.ByDate.Reverse -}}
          {{ with .Parent }}
-         {{ if .Params.active}}
+         {{ if eq .Params.active site.Params.shows_active }}
                <div class="swiper-slide">
                  <div class="card-image">
                    <figure class="image">

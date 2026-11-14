@@ -63,7 +63,7 @@
 <section class="section episode-list">
   <div class="container p-4">
     <div class="columns is-multiline">
-      {{ range where (where .Pages "Kind" "section") "Params.active" true }}
+      {{ range where (where .Pages "Kind" "section") "Params.active" site.Params.shows_active }}
         <div class="column is-6 is-4-fullhd is-4-desktop is-12-mobile"  style="display: flex;">
           {{ partial "episode/show.html" . }}
         </div>
