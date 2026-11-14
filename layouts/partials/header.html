@@ -33,7 +33,7 @@
                               <span>{{ .Name }}</span>
                           </a>
 
-                          <div class="navbar-dropdown">
+                          <div class="navbar-dropdown{{ if gt (len .Children) 12 }} is-multicolumn{{ end }}">
                               {{ range .Children }}
                               <a href="{{ .URL }}" class="navbar-item {{ if $active }}active{{ end }}">{{ .Name }}</a>
                               {{ end }}

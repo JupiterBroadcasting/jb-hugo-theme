@@ -57,6 +57,13 @@ a.navbar-item,
       &:hover
         background-color: v.$grey-dark
         color: v.$white
+  // Long Shows menus (the archive's 28 retired shows) would run off the bottom of the window as one column
+  .navbar-dropdown.is-multicolumn
+    column-count: 3
+    column-gap: 0
+    width: 45rem
+    > .navbar-dropdown
+      column-span: all
   .navbar-item.has-dropdown
     &:focus,
     &:hover,
