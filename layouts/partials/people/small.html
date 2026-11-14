@@ -1,4 +1,7 @@
-<a href="/{{ .Type | pluralize }}/{{ .Params.username }}" class="is-flex" style="width: 100%;">
+{{- /* the host/guest page lists their episodes, but only exists if they're on an episode of this site */ -}}
+{{- $href := printf "/%s/%s" (.Type | pluralize) .Params.username -}}
+{{- if not (site.GetPage $href) }}{{ $href = .RelPermalink }}{{ end -}}
+<a href="{{ $href }}" class="is-flex" style="width: 100%;">
   <div class="card card-people">
     <div class="card-image">
       <img class="image is-fullwidth" src="{{ .Params.avatar }}" alt="{{ .Title }}">
