@@ -25,8 +25,8 @@ Requires Hugo >= 0.169.0 and Go (Hugo Modules use it to fetch). Defaults for eve
 [`hugo.toml`](hugo.toml); a site overrides only what differs, e.g. the archive sets
 `params.support_url = "https://www.jupiterbroadcasting.com/membership/"`.
 
-The theme also ships the emoji-tag content adapter (`content/tags/_content.gotmpl`) and its slug map
-(`data/emoji_slugs.toml`), so both sites get working emoji tag pages.
+The theme also ships the emoji-tag content adapter (`content/tags/_content.gotmpl`). Each site keeps its own
+`data/emoji_slugs.toml`, since the emoji tags in use differ per site.
 
 ## Branches and releases
 
