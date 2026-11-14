@@ -31,3 +31,6 @@
   feed.itunes_second_sub_category = "Business"
   feed.language = "en-us"
   feed.itunes_type = "episodic"
+  feed.rss = "http://feeds2.feedburner.com/JupiterBroadcasting"
+  feed.video_rss = "http://feeds2.feedburner.com/AllJupiterVideos"
+  feed.jupiter_station = "https://jupiterstation.live/rss"
