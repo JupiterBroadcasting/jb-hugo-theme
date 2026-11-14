@@ -1,5 +1,9 @@
 {{ range $tag := . }}
   <span class="tag">
-    <a href="{{ "/tags/" | relLangURL }}{{ $tag | urlize }}">{{$tag}}</a>
+    {{ $href := printf "/tags/%s/" (cond (ne (replace $tag " " "-" | urlize ) "") (replace $tag " " "-" | urlize) (replace $tag " " "-" | urlquery)) }}
+    {{ if not (findRE `[\p{L}\p{N}]` $tag) }}
+      {{ with site.GetPage (printf "/tags/%s" $tag) }}{{ $href = .RelPermalink }}{{ end }}
+    {{ end }}
+    <a href="{{ $href }}">{{$tag}}</a>
   </span>
 {{ end }}
