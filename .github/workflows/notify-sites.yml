@@ -1,0 +1,27 @@
+# Tells both sites a new theme commit is on develop; each opens a "bump theme" PR into its develop
+# (.github/workflows/theme-bump.yml there). Without SITE_DISPATCH_TOKEN the sites still pick it up hourly.
+name: Notify sites
+
+on:
+  push:
+    branches: [develop]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send theme-updated
+        env:
+          # fine-grained PAT or GitHub App token with contents:write on both site repos
+          TOKEN: ${{ secrets.SITE_DISPATCH_TOKEN }}
+        run: |
+          if [ -z "$TOKEN" ]; then
+            echo "::notice::SITE_DISPATCH_TOKEN not set; the sites' hourly theme-bump schedule will pick up ${GITHUB_SHA}"
+            exit 0
+          fi
+          for repo in goodwinlabs/jupiterbroadcasting.com goodwinlabs/archive.jupiterbroadcasting.com; do
+            curl -sSf -X POST "https://api.github.com/repos/${repo}/dispatches" \
+              -H "Authorization: Bearer ${TOKEN}" -H "Accept: application/vnd.github+json" \
+              -d "{\"event_type\":\"theme-updated\",\"client_payload\":{\"sha\":\"${GITHUB_SHA}\"}}"
+            echo "notified ${repo}"
+          done

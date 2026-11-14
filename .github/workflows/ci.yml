@@ -1,0 +1,66 @@
+# Builds both sites' develop against this theme commit and runs each site's own e2e suite, so a theme PR is checked
+# against both sites before it merges.
+name: Sites e2e
+
+on:
+  pull_request:
+  push:
+    branches: [develop]
+  workflow_dispatch:
+
+env:
+  THEME_MODULE: github.com/goodwinlabs/jb-hugo-theme
+
+jobs:
+  e2e:
+    name: ${{ matrix.site }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        site: [jupiterbroadcasting.com, archive.jupiterbroadcasting.com]
+    steps:
+      - name: Checkout theme
+        uses: actions/checkout@v4
+        with:
+          path: theme
+
+      - name: Checkout ${{ matrix.site }} develop
+        uses: actions/checkout@v4
+        with:
+          repository: goodwinlabs/${{ matrix.site }}
+          ref: develop
+          path: site
+
+      # The site's production Dockerfile builds inside its own context, so the theme is copied in and go.mod
+      # points at it (Hugo honours go.mod replace directives)
+      - name: Use this theme
+        working-directory: site
+        run: |
+          cp -r ../theme _theme
+          rm -rf _theme/.git
+          go mod edit -replace "${THEME_MODULE}=./_theme"
+          grep replace go.mod
+
+      - name: Fetch pinned people (archive)
+        if: hashFiles('site/scripts/fetch-people.sh') != ''
+        run: ./site/scripts/fetch-people.sh
+
+      - name: Start containers
+        working-directory: site/test
+        env:
+          DOCKER_BUILDKIT: 1
+          BUILDKIT_PROGRESS: plain
+        run: docker compose up -d --build
+
+      - name: Run tests
+        working-directory: site/test
+        run: script -e -c "docker compose exec testing pytest -m 'not periodic' --base-url http://jb-com"
+
+      - name: Save screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots-${{ matrix.site }}
+          path: site/screenshots/
+          if-no-files-found: ignore
