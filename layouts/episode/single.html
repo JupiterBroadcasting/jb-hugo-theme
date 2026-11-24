@@ -92,7 +92,7 @@
                     <h2>Sponsors</h2>
                     <section class="section px-0 sponsor-list">
                       {{ range . }}
-                        {{ $sponsor := index (where (where site.Pages "Section" "sponsors") "Params.shortname" .) 0 }}
+                        {{ $sponsor := index hugo.Data.sponsors . }}
                         {{ if $sponsor }}
                           {{ partial "sponsor/small.html" $sponsor }}
                           <br />
@@ -119,7 +119,7 @@
                     <h2>Sponsors</h2>
                     <section class="section px-0 sponsor-list">
                       {{ range . }}
-                        {{ $sponsor := index (where (where site.Pages "Section" "sponsors") "Params.shortname" .) 0 }}
+                        {{ $sponsor := index hugo.Data.sponsors . }}
                         {{ if $sponsor }}
                           {{ partial "sponsor/small.html" $sponsor }}
                           <br />
